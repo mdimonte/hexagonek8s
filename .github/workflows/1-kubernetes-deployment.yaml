@@ -1,0 +1,59 @@
+name: Deploys the app to a Kubernetes cluster
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+env:
+  KUBECTL_VERSION: "1.28.2"
+  CONTAINER_REGISTRY: "mdimonte"
+  CONTEXT_NAME: "hexagone"
+
+jobs:
+
+  deploy-frontend:
+  
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+
+    runs-on: ubuntu-latest
+    
+    env:
+      SERVICE: frontend
+      IMAGE: "frontend:v1"
+    
+    steps:
+      - name: checks the repo out
+        uses: actions/checkout@v3
+
+      - name: runs the 'super linter'
+        uses: docker://github/super-linter:v3
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEAULT_BRANCH: master
+
+      - name: installs kubectl client
+        uses: Azure/setup-kubectl@v3
+        with:
+          version: ${{ KUBECTL_VERSION }}
+
+      - name: installs kustomize
+        uses: syntaqx/setup-kustomize@v1
+
+      - name: generates the kubeconfig file and sets the context
+        run: |
+          mkdir -p -m 750 $HOME/.kube
+          echo ${{ secrets.KUBECONFIG }} > $HOME/.kube/config
+          kubectl config use-context ${{ env.CONTEXT_NAME }}
+
+      - name: kustomize | sets the container image
+        run: |
+          (cd manifests/${{ SERVICE }}/base; kustomize edit set image IMAGE_NAME=${{ CONTAINER_REGISTRY }}/${{ IMAGE }})
+
+      - name: deploys the application
+        run: |
+          kustomize build manifests/${{ SERVICE }}/hexagone | kubectl apply -f -
+
