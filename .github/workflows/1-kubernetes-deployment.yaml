@@ -38,7 +38,7 @@ jobs:
       - name: installs kubectl client
         uses: Azure/setup-kubectl@v3
         with:
-          version: ${{ KUBECTL_VERSION }}
+          version: ${{ env.KUBECTL_VERSION }}
 
       - name: installs kustomize
         uses: syntaqx/setup-kustomize@v1
@@ -51,9 +51,9 @@ jobs:
 
       - name: kustomize | sets the container image
         run: |
-          (cd manifests/${{ SERVICE }}/base; kustomize edit set image IMAGE_NAME=${{ CONTAINER_REGISTRY }}/${{ IMAGE }})
+          (cd manifests/${{ env.SERVICE }}/base; kustomize edit set image IMAGE_NAME=${{ env.CONTAINER_REGISTRY }}/${{ env.IMAGE }})
 
       - name: deploys the application
         run: |
-          kustomize build manifests/${{ SERVICE }}/hexagone | kubectl apply -f -
+          kustomize build manifests/${{ env.SERVICE }}/hexagone | kubectl apply -f -
 
