@@ -35,6 +35,7 @@
    - create a budget, set it to 180$ and set some associated alerts (i.e. 50%, 80%, 95%) to be notified when these thresholds are met
 
 3. install the Azure CLI (`az`) using these instructions [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt)
+
 4. login to Azure with the CLI
 
    ```bash
