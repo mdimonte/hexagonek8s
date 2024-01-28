@@ -1,10 +1,10 @@
 #cloud-config
 write_files:
   - owner: root:root
-    path: /etc/mickael.txt
+    path: /etc/test.txt
     defer: true
     content: |
-      coucou
+      hello world
 runcmd:
   - echo "========== START OF CUSTOM CLOUD-INIT =========="
   - swapoff -a
