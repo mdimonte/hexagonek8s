@@ -9,7 +9,7 @@ It will also load-balance the incoming traffic to the pods behind it.
 First let's deploy another `deployment`, we want it to have:
 
 - 3 replicas
-- one container using the image `docker.artifactory-cn.michelin.com/k8s/code-samples/single-app:v2.1`
+- one container using the image `mdimonte/single-app:v0.1`
 - the `http` port being the port `8000` of the container
 - 30m CPU and 25Mi of memory as requests
 - 80m CPU and 50Mi of memory as limits

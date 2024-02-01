@@ -40,7 +40,7 @@ We want a `deployment` with:
 
 A `service` matching the label `app: step-7-app` and routing the traffic from its port 80 to the `http` port of the backing pods.
 
-An ingress matching the host `<your id>.dk8sacj2.aze.michelin.com` and sending the incoming traffic to the port 80 of the `service` you have just created.
+An ingress matching the host `<my-app>.my-corp.com` and sending the incoming traffic to the port 80 of the `service` you have just created.
 
 You may have noticed that the registry we used is special (i.e. totally wrong 😀). This is because we will replace it in the `kustomization.yaml` file.
 
@@ -55,8 +55,8 @@ With just the required config, nothing is modified. To change the image used by 
 ```yaml
 images:
 - name: <the image to change>
-  newName: docker.artifactory-cn.michelin.com/k8s/code-samples/single-app
-  newTag: v2.1
+  newName: mdimonte/single-app
+  newTag: v0.1
 ```
 
 This will replace our fake registry name with an actual and working one. It is not very useful for a single container, but for a more complex application it can make a nice code factorization.
@@ -81,13 +81,13 @@ Create two files called `deployment-patch.yaml` and `ingress-patch.yaml`. The co
 - information needed to identify the resource to patch (`apiVersion`, `kind` and `name`)
 - the fields we want to modify
 
-For the dev overlay, we want the deployment to have **2 replicas** and a **`terminationGracePeriodSeconds` set to 1 second**. For the ingress we just want to **change the host to `<your id>-dev.dk8sacj2.aze.michelin.com`**.
+For the dev overlay, we want the deployment to have **2 replicas** and a **`terminationGracePeriodSeconds` set to 1 second**. For the ingress we just want to **change the host to `<my-app>-dev.my-corp.com`**.
 
 > **Note**: For the ingress patch, you may need to rewrite almost everything in the `rules` array.
 
 Once it is done, test your overlay with `kustomize build deploy/environments/dev`.
 
-Then you can do the same thing for the qa environment, this time we want the deployment to have **5 replicas** and a **`terminationGracePeriodSeconds` set to 10 seconds**. For the ingress we want to **change the host to `<your id>-qa.dk8sacj2.aze.michelin.com`**.
+Then you can do the same thing for the qa environment, this time we want the deployment to have **5 replicas** and a **`terminationGracePeriodSeconds` set to 10 seconds**. For the ingress we want to **change the host to `<my-app>-qa.my-corp.com`**.
 
 ## Deploy the app
 

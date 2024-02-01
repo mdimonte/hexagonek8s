@@ -6,8 +6,7 @@ Deploy the same application as the one used in [step5](../step-5/README.md) whic
 
 ## steps to run
 
-> - in this scenario we will use an 'automated' DNS name leveraging the cluster wildcard domain name: `<my-app>.dk8sacj2.aze.michelin.com`
-> - in real life situation you will most probably want to get a user-friendly DNS name (i.e. `<my-app>.michelin.com`)
+> - in this scenario we will use an 'automated' DNS name leveraging the cluster wildcard domain name: `<my-app>.my-corp.com`
 
 ## Generate a self-signed certificate
 
@@ -16,15 +15,15 @@ Deploy the same application as the one used in [step5](../step-5/README.md) whic
 
 ```bash
 openssl req -x509 -nodes -days 3560 -newkey rsa:4096 -sha256 \
--keyout my-app.michelin.com.key \
--out my-app.michelin.com.crt \
--subj "/CN=my-app.michelin.com/O=my-app.michelin.com" \
+-keyout <my-app>.my-corp.com.key \
+-out <my-app>.my-corp.com.crt \
+-subj "/CN=<my-app>.my-corp.com.com/O=<my-app>.my-corp.com.com" \
 -extensions san \
 -config <( \
  echo "[req]"; \
  echo "distinguished_name=req"; \
  echo "[san]"; \
- echo "subjectAltName=DNS:my-app.michelin.com" \
+ echo "subjectAltName=DNS:<my-app>.my-corp.com.com" \
  )
 ```
 
