@@ -9,11 +9,7 @@ Build a container image and then use that image in a Kubernetes `deployment`.
 > note that for the sake of the simplicity, we are going to use `docker` to build the container image here.
 > however, in a real life scenario we recommend to use `kaniko`
 
-First let's build the image you will use in this exercise. To do this you will write a `Dockerfile`.
-
-Michelin environment has a few specificities, so it is easier to use images already configured for Michelin. They can be found in the [Michelin Docker Hub](https://gitlab.michelin.com/DEV/docker/michelin-docker-hub). There is also a lot of documentation on [dev.michelin.com](https://dev.michelin.com/digital-sustainability/docker) about optimizations and best practices.
-
-For now let's focus on the `Dockerfile` creation. We want the image:
+First let's build the image you will use in this exercise. To do this you will write a `Dockerfile`:
 
 - To be based on Ubuntu
 - To have updated `nginx` and `curl` packages
@@ -21,13 +17,15 @@ For now let's focus on the `Dockerfile` creation. We want the image:
 - To have the provided default config `default.conf` in `/etc/nginx/conf.d/`
 - And to start with the command `nginx -g daemon off;`
 
-Information about dockerfiles can be found on [dev.michelin.com](https://dev.michelin.com/docker/dockerfile) and on the official [Docker documentation](https://docs.docker.com/get-started/).
+Information about dockerfiles can be found on the official [Docker documentation](https://docs.docker.com/get-started/).
 
-Once your `Dockerfile` is ready, you can build the docker image with the Docker CLI, with the command `docker build`. In order to push it to the correct repository in Michelin's Artifactory, the image has to be tagged accordingly. For this exercise we will use `docker-snapshot.artifactory-cn.michelin.com/k8s/hands-on/$LOGNAME-step3:latest`, with `$LOGNAME` being your user name (this is a standard Linux shell environment variable that is alrady set for you at login time).
+Once your `Dockerfile` is ready, you can build the docker image with the Docker CLI, with the command `docker build`.  
+:bulb: note that in order to push it to the docker hub, you must have an docker.io account
 
-## Push the image to Artifactory
+## Push the image to hub.docker.com
 
-With the image built and stored locally, you can push it to an image repository for it to be available everywhere. Michelin has such a repository on Artifactory with `docker-snapshot.artifactory-cn.michelin.com`. Before pushing, please login with `docker login` and your Artifactory personal token.
+With the image built and stored locally, you can push it to an image repository for it to be available everywhere: we are goign to use the official [Docker Hub](https://hub.docker.com/). Before pushing, please login with `docker login` using an access token.  
+:bulb: on the Docker hub, navigate to `My Account > Security > Access Tokens` and click on `New Access Token`
 
 One you are logged in you only have to push your image with `docker push`!
 

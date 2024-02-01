@@ -8,7 +8,7 @@ Run a few first PODs and discover some basics of Kubernetes.
 
 First, we want to create a simple pod with one container so we only need to specify an image for the container and Kubernetes will fill out most of the other fields with default values.
 
-For the image we will use a modified Nginx that can run without being root in the container, as being root when it is not needed is a bad practice for security. The image can be found here: [docker.artifactory-cn.michelin.com/nginxinc/nginx-unprivileged:latest](https://docker.artifactory-cn.michelin.com/ui/packages/docker:%2F%2Fnginxinc%2Fnginx-unprivileged?name=nginx&type=packages)
+For the image we will use a modified Nginx that can run without being root in the container, as being root when it is not needed is a bad practice for security. The image can be found here: [nginxinc/nginx-unprivileged:latest](hhttps://hub.docker.com/r/nginxinc/nginx-unprivileged)
 
 **Hint**: It is hard to remember all the required fields and the manifest structure, so checking the [Kubernetes documentation](https://kubernetes.io/docs/home/) is the way to go.
 
