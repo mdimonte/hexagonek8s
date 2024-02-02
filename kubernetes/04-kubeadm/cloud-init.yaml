@@ -1,0 +1,34 @@
+#cloud-config
+write_files:
+  - owner: root:root
+    path: /etc/test.txt
+    defer: true
+    content: |
+      hello world
+runcmd:
+  - echo "========== START OF CUSTOM CLOUD-INIT =========="
+  - swapoff -a
+  - apt-get update
+  - echo overlay | sudo tee -a /etc/modules-load.d/containerd.conf
+  - echo br_netfilter | sudo tee -a /etc/modules-load.d/containerd.conf
+  - echo "net.bridge.bridge-nf-call-ip6tables = 1" | sudo tee -a /etc/sysctl.d/kubernetes.conf
+  - echo "net.bridge.bridge-nf-call-iptables = 1" | sudo tee -a /etc/sysctl.d/kubernetes.conf
+  - echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.d/kubernetes.conf
+  - sysctl --system
+  - apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+  - add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - apt-get update
+  - apt install -y containerd.io
+  - containerd config default | tee /etc/containerd/config.toml
+  - sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+  - systemctl restart containerd
+  - systemctl enable containerd
+  - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/kubernetes-xenial.gpg
+  - apt-add-repository -y "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+  - apt update
+  - apt install -y kubelet kubeadm kubectl
+  - apt-mark hold kubelet kubeadm kubectl
+  - modprobe br_netfilter
+  - echo "========== END OF CUSTOM CLOUD-INIT =========="
+
