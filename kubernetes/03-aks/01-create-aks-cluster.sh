@@ -4,10 +4,8 @@ az aks create -g hexagone-kubernetes -n aks-devtest \
    --kubernetes-version v1.27.7 \
    --auto-upgrade-channel patch \
    --dns-service-ip 172.16.0.10 \
-   --enable-addons http_application_routing,ingress-appgw \
-   --appgw-name my-appgw \
-   --appgw-subnet-cidr 10.230.0.0/16 \
    --enable-cluster-autoscaler \
+   --enable-app-routing \
    --max-count 2 \
    --min-count 1 \
    --node-count 1 \
