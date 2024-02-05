@@ -5,7 +5,7 @@ usage() {
   exit 1
 }
 
-while getopts "k:c:w:" opt; do
+while getopts "k:c:w:o:" opt; do
     case "${opt}" in
         k)
             ssh_private_keyfile=${OPTARG}
@@ -26,7 +26,7 @@ while getopts "k:c:w:" opt; do
 done
 shift $((OPTIND-1))
 
-if [[ -z "$ssh_private_keyfile" || -z "$cp_vm_name" || -z "$worker_vm_name" || "$kubeconfig" ]]; then
+if [[ -z "$ssh_private_keyfile" || -z "$cp_vm_name" || -z "$worker_vm_name" || -z "$kubeconfig" ]]; then
     usage
 fi
 
