@@ -13,7 +13,7 @@ Now try to access the application using the host that you have documented in the
 
 > - in this scenario we use an 'automated' DNS name leveraging the cluster wildcard domain name: `<my-app>.my-corp.com`
 
-## deploy an `HorizontalPodAutocaler`
+## deploy an `HorizontalPodAutoscaler`
 
 Now that the application is deployed and is accessible from outside the cluster, let's see how to make it able to adjust its 'sizing' according to the amount of CPU it needs to run.  
 
