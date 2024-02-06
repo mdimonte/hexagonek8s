@@ -11,4 +11,8 @@ Some step-by-step exercices to start getting your hands on Kubernetes
 - [[step-7]](step-7/): deploy onto multiple environments using `kustomize`
 - [[step-8]](step-8/): add TLS termination at the ingress level
 - [[step-9]](step-9/): play with the liveness, readiness & startup probes
-- [[step-10]](step-10/): observe the app with splunk (optional, optional, optional ;) )
+- [[step-10]](step-10/): scaling appli iwth `HPA`s
+- [[step-11]](step-11/): improving availability with `PDB` to resist maintenance operations
+- [[step-12]](step-12/): securing the internal network traffic with `NetworkPolicies`
+- [[step-13]](step-13/): running workload with persistent storage
+- [[step-14]](step-14/): observe the app with splunk (optional, optional, optional ;) )
