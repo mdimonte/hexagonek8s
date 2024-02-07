@@ -13,7 +13,7 @@ Deploy a more realistic app made up of 2 services/components:
 
 First, we will deploy the backend. We want to deploy a `deployment` with this caracteristics:
 
-- 3 replicas
+- 1 replica
 - one container using the image `mdimonte/backend-singleapp:v0.1`
 - the `http` port being the port `8080` of the container
 - 30m CPU and 512MiB of memory as requests
@@ -21,20 +21,20 @@ First, we will deploy the backend. We want to deploy a `deployment` with this ca
 - the label `app: backend`
 
 Then create a `service` of type `ClusterIP` matching pods of the `deployment` and routing the traffic from its port `80` to the port `http` of the backing pods.  
-Third, create an `ingress` listening on the host `<my-app>-backend.my-corp.com` and dispatching the inbound traffic to the port `80` of service you have create in the previous step.
+Third, create an `ingress` listening on the host `step6-backend.<your_name>.calpeabyla.com` and dispatching the inbound traffic to the port `80` of service you have create in the previous step.
 
 Once the manifests are ready, deploy them on the cluster.
 
 If the backend is running and reachable, it is time to deploy the frontend component.
 
 We want a second `service` of type `ClusterIP` matching the pods with the label `app: frontend` and routing the traffic from its port `80` to the port `http` of the pods.  
-And we also need a second `ingress` listening on the host `<my-app>.my-corp.com` and dispatching the inbound traffic to the port `80` of service you have created just above.  
+And we also need a second `ingress` listening on the host `step6.<your_name>.calpeabyla.com` and dispatching the inbound traffic to the port `80` of service you have created just above.  
 
-We would also like to be able to change the configuration of the frontend, especially the URL making reference to the backend component, without having to change the Docker image. To do this, we can use a [`configMap`](https://kubernetes.io/docs/concepts/configuration/configmap/). Let's write a manifest for this resource and in the attribute `data` put a *file-like* key `config.json` with the following content:
+We would also like to be able to change the configuration of the frontend, especially the URL making reference to the backend component, without having to change the Docker image. To do this, we can use a [`configMap`](https://kubernetes.io/docs/concepts/configuration/configmap/). Let's write a manifest for this `configmap` and in the attribute `data` put a *file-like* key `config.json` with the following content:
 
 ```json
 {
-    "BACKEND_URL": "http://<my-app>-backend.my-corp.com"
+    "BACKEND_URL": "http://step6-backend.<your_name>.calpeabyla.com"
 }
 ```
 
@@ -51,9 +51,9 @@ The frontend pod should start very quickly. Once it is ready, let's do some expe
 
 > - Deploy the [helper pod](../helper/README.md) if it is not present yet
 > - exec into the helper pod and access the backend via its `service`: `curl http://backend-svc/data`
-> - exec into the helper pod and access the frontend via its `service`: `curl http://frontend-svc/data`
-> - from your laptop run `curl http://<my-app>.my-corp.com`
-> - using your favorite browser navigate to `http://<my-app>.my-corp.com`
+> - exec into the helper pod and access the frontend via its `service`: `curl http://frontend-svc`
+> - from your laptop run `curl http://step6.<your_name>.calpeabyla.com`
+> - using your favorite browser navigate to `http://step6.<your_name>.calpeabyla.com`
 
 ## cleanup
 

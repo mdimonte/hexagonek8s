@@ -2,7 +2,7 @@
 
 ## Objectives
 
-Preparing the application to 'resist' cluster maintenance operations with `PodDisruptionBudget`.  
+The objective is to prepare the application to 'resist' cluster maintenance operations with `PodDisruptionBudget`.  
 Indeed, when deploying an application on Kubernetes we want it to be highly available.  
 As already seen before, resisting failures and high workloads is achieved using `Deployment` with multiple replicas and `HorizontalPodAutoscaler`.  
 Now, the objective is that the application keeps running even when the unexpected events are not coming from various failures but maintenance operations executed by the cluster administrators
@@ -10,11 +10,11 @@ Now, the objective is that the application keeps running even when the unexpecte
 ## deploy the app components
 
 Make a `deployment` manifest to deploy 1 pod (replicas) with the image `mdimonte/single-app:v0.1` and the same characteristics as in the previous exercise, and make a `service` manifest that matches with the deployment, then deploy them on your namespace.  
-Next make an `ingress` manifest that dispatches the traffic for the host `<my-app>.my-corp.com` to the port `80` of the `service` you have created.
+Next make an `ingress` manifest that dispatches the traffic for the host `step11.<your_name>.calpeabyla.com` to the port `80` of the `service` you have created.
 
 Now try to access the application using the host that you have documented in the ingress in your favorite web browser.
 
-> - in this scenario we use an 'automated' DNS name leveraging the cluster wildcard domain name: `<my-app>.my-corp.com`
+> - in this scenario we use an 'automated' DNS name leveraging the cluster wildcard domain name: `step11.<your_name>.calpeabyla.com`
 
 ## deploy an `PodDisruptionBudget`
 

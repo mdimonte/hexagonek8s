@@ -6,7 +6,7 @@ Deploy the same application as the one used in [step5](../step-5/README.md) whic
 
 ## steps to run
 
-> - in this scenario we will use an 'automated' DNS name leveraging the cluster wildcard domain name: `<my-app>.my-corp.com`
+> - in this scenario we will use an 'automated' DNS name leveraging the cluster wildcard domain name: `step8.<your_name>.calpeabyla.com`
 
 ## Generate a self-signed certificate
 
@@ -15,15 +15,15 @@ Deploy the same application as the one used in [step5](../step-5/README.md) whic
 
 ```bash
 openssl req -x509 -nodes -days 3560 -newkey rsa:4096 -sha256 \
--keyout <my-app>.my-corp.com.key \
--out <my-app>.my-corp.com.crt \
--subj "/CN=<my-app>.my-corp.com.com/O=<my-app>.my-corp.com.com" \
+-keyout step8.<your_name>.calpeabyla.com.key \
+-out step8.<your_name>.calpeabyla.com.crt \
+-subj "/CN=step8.<your_name>.calpeabyla.com/O=step8.<your_name>.calpeabyla.com" \
 -extensions san \
 -config <( \
  echo "[req]"; \
  echo "distinguished_name=req"; \
  echo "[san]"; \
- echo "subjectAltName=DNS:<my-app>.my-corp.com.com" \
+ echo "subjectAltName=DNS:step8.<your_name>.calpeabyla.com" \
  )
 ```
 
