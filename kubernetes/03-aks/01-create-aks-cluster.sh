@@ -1,6 +1,6 @@
 #!/bin/bash
 
-az aks create -g hexagone-kubernetes -n aks-devtest \
+az aks create -g hexagone-kubernetes-dublin -n aks-devtest \
    --kubernetes-version v1.27.7 \
    --auto-upgrade-channel patch \
    --dns-service-ip 172.16.0.10 \
@@ -10,7 +10,7 @@ az aks create -g hexagone-kubernetes -n aks-devtest \
    --min-count 1 \
    --node-count 1 \
    --k8s-support-plan KubernetesOfficial \
-   --load-balancer-sku standard \
+   --load-balancer-sku basic \
    --network-plugin kubenet \
    --network-policy calico \
    --node-vm-size Standard_B2s \

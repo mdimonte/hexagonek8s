@@ -1,4 +1,4 @@
 #!/bin/bash
 
-az aks approuting enable -g hexagone-kubernetes -n aks-devtest
+az aks approuting enable -g hexagone-kubernetes-dublin -n aks-devtest
 
