@@ -17,7 +17,7 @@ Now try to access the application using the host that you have documented in the
 
 Now that the application is deployed and is accessible from outside the cluster, let's see how to make it able to adjust its 'sizing' according to the amount of CPU it needs to run.  
 
-For that, make a `HorizontalPodAutoscaler` manifest to target the deployment you have juste created. This `HPA` must set the minimum number of replicas to 2, the maximum to 5 and add new replica if the CPU average utilization used by the replicas goes beyond 20%.  
+For that, make a `HorizontalPodAutoscaler` manifest to target the deployment you have just created. This `HPA` must set the minimum number of replicas to 2, the maximum to 5 and add new replica if the CPU average utilization used by the replicas goes beyond 20%.  
 Note here, that 20% does not make sense on its own. In order for the system to be able to determine if the CPU consumption goes over a specific percentage, you will have to set what we call `resources` on the container defined in the pod template of the `deployment`.  
 Here is an example of such a `resources` definition (do not hesitate to look at the documentation [https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/):  
 
