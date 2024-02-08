@@ -15,4 +15,4 @@ Some step-by-step exercices to start getting your hands on Kubernetes
 - [[step-11]](step-11/): improving availability with `PDB` to resist maintenance operations
 - [[step-12]](step-12/): securing the internal network traffic with `NetworkPolicies`
 - [[step-13]](step-13/): running workload with persistent storage
-- [[step-14]](step-14/): observe the app with splunk (optional, optional, optional ;) )
+- [[step-14]](step-14/): observe the app (optional, optional, optional ;) )
