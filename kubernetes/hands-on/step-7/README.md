@@ -34,8 +34,8 @@ We want a `deployment` with:
 - 1 replica
 - one container using the image `fakeregistry.com/single-app`
 - the `http` port being the port `8000` of the container
-- 30m CPU and 25MiB of memory as requests
-- 80m CPU and 50MiB of memory as limits
+- 30m CPU and 25Mi of memory as requests
+- 80m CPU and 50Mi of memory as limits
 - the label `app: step-7-app`
 
 A `service` matching the label `app: step-7-app` and routing the traffic from its port 80 to the `http` port of the backing pods.

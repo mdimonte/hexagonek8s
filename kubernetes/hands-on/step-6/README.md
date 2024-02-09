@@ -16,8 +16,8 @@ First, we will deploy the backend. We want to deploy a `deployment` with this ca
 - 1 replica
 - one container using the image `mdimonte/backend-singleapp:v0.1`
 - the `http` port being the port `8080` of the container
-- 30m CPU and 512MiB of memory as requests
-- 300m CPU and 750MiB of memory as limits
+- 30m CPU and 512Mi of memory as requests
+- 300m CPU and 750Mi of memory as limits
 - the label `app: backend`
 
 Then create a `service` of type `ClusterIP` matching pods of the `deployment` and routing the traffic from its port `80` to the port `http` of the backing pods.  
@@ -43,8 +43,8 @@ Then write the `deployment` manifest for the frontend that will use this `config
 - 1 replica
 - one container using the image `mdimonte/angular-singleapp:v0.1`
 - the `http` port being the port `8080` of the container
-- 50m CPU and 50MiB of memory as requests
-- 100m CPU and 100MiB of memory as limits
+- 50m CPU and 50Mi of memory as requests
+- 100m CPU and 100Mi of memory as limits
 - the `configMap` that you have just created should be mounted over `/usr/share/nginx/html/assets` inside the container (this is where the frontend application expects its config file to be located)  
 
 The frontend pod should start very quickly. Once it is ready, let's do some experiments:
