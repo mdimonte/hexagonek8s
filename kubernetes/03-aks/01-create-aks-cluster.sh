@@ -1,23 +1,31 @@
 #!/bin/bash
 
-az aks create -g hexagone-kubernetes-dublin -n aks-devtest \
-   --kubernetes-version v1.27.7 \
+az provider list --query "[?namespace=='Microsoft.ContainerService']" --output table
+
+az provider register --namespace Microsoft.ContainerService
+
+az group create -n hexagone-kubernetes -l swedencentral
+
+az aks create -g hexagone-kubernetes -n aks-devtest \
+   --kubernetes-version v1.35.4 \
    --auto-upgrade-channel patch \
    --dns-service-ip 172.16.0.10 \
-   --enable-cluster-autoscaler \
    --enable-app-routing \
+   --enable-cluster-autoscaler \
    --max-count 2 \
    --min-count 1 \
    --node-count 1 \
    --k8s-support-plan KubernetesOfficial \
-   --load-balancer-sku basic \
+   --load-balancer-sku standard \
    --network-plugin kubenet \
    --network-policy calico \
-   --node-vm-size Standard_B2s \
-   --os-sku Ubuntu \
+   --node-vm-size Standard_B2als_v2 \
+   --os-sku Ubuntu2404 \
    --pod-cidr 192.168.0.0/16 \
    --service-cidr 172.16.0.0/16 \
    --generate-ssh-keys \
    --ssh-key-value $HOME/.ssh/id_mdimonte_hexagone_rsa.pub \
-   --tier free
+   --sku base \
+   --tier free \
+   --yes
 
