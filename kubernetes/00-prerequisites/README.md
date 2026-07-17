@@ -27,7 +27,8 @@
 
 ## aks
 
-1. have an Azure account. You can get a free trial one using these instructions [here](https://azure.microsoft.com/en-us/free/search/?ef_id=_k_CjwKCAiA8NKtBhBtEiwAq5aX2BsBLk0gWTyFDQl8oL8pl7dtHtDI4YWq7opjgeJjtb5tIbAWBdiAsxoCqiEQAvD_BwE_k_&OCID=AIDcmm0g9y8ggq_SEM__k_CjwKCAiA8NKtBhBtEiwAq5aX2BsBLk0gWTyFDQl8oL8pl7dtHtDI4YWq7opjgeJjtb5tIbAWBdiAsxoCqiEQAvD_BwE_k_&gad_source=1&gclid=CjwKCAiA8NKtBhBtEiwAq5aX2BsBLk0gWTyFDQl8oL8pl7dtHtDI4YWq7opjgeJjtb5tIbAWBdiAsxoCqiEQAvD_BwE)
+1. have an Azure account. You can get a free trial one using these instructions [here](https://azure.microsoft.com/en-us/free/search/?ef_id=_k_CjwKCAiA8NKtBhBtEiwAq5aX2BsBLk0gWTyFDQl8oL8pl7dtHtDI4YWq7opjgeJjtb5tIbAWBdiAsxoCqiEQAvD_BwE_k_&OCID=AIDcmm0g9y8ggq_SEM__k_CjwKCAiA8NKtBhBtEiwAq5aX2BsBLk0gWTyFDQl8oL8pl7dtHtDI4YWq7opjgeJjtb5tIbAWBdiAsxoCqiEQAvD_BwE_k_&gad_source=1&gclid=CjwKCAiA8NKtBhBtEiwAq5aX2BsBLk0gWTyFDQl8oL8pl7dtHtDI4YWq7opjgeJjtb5tIbAWBdiAsxoCqiEQAvD_BwE)  
+click on "Try Azure for free"
 2. go to the [Azure portal](https://portal.azure.com)
 
    - navigate to `Cost Management + Billing`
