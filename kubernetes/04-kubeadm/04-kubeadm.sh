@@ -53,22 +53,24 @@ fi
 
 # let's run "kubeadm init ..."
 printf "running 'kubeadm init ...' command\n"
-ssh -i $ssh_private_keyfile $USER@$cp_public_ip_address 2>/dev/null -- sudo \
+output=$(ssh -i $ssh_private_keyfile $USER@$cp_public_ip_address 2>/dev/null -- sudo \
     kubeadm init \
         --pod-network-cidr=192.168.0.0/16 \
 		    --service-cidr=172.16.0.0/16 \
-		    --kubernetes-version=v1.28.2 \
+		    --kubernetes-version=v1.35.6 \
 		    --apiserver-advertise-address=$cp_private_ip_address \
-		    --control-plane-endpoint=$cp_public_ip_address
+		    --control-plane-endpoint=$cp_public_ip_address)
+printf "$output\n\n"
 
 printf "getting the kubeadm token that has been generated ... "
-token=$(ssh -i $ssh_private_keyfile $USER@$cp_public_ip_address 2>/dev/null -- sudo \
-  kubeadm token list | grep -Ev "^TOKEN" | awk '{ print $1 }')
-if [[ ! -z "$token" ]]; then
-  printf "ok (%s)\n" $token
-else
-  printf "FAILED\n"
+token=$(echo "$output" | grep -E "^kubeadm join .*:6443 --token .*$" | awk '{ print $5 }')
+hash=$(echo "$output" | grep -E "^kubeadm join .*:6443 --token .*$" | awk '{ print $7 }')
+
+if [[ -z "$token" || -z "$hash" ]]; then
+  printf "FAILED to get the kubeadm token and/or the discovery-token-ca-cert-hash\n"
   exit 1
+else
+  printf "ok (token=%s, hash=%s)\n" $token $hash
 fi
 
 # getting the public IP addresses of the worker-node VM
@@ -88,10 +90,9 @@ printf "running 'kubeadm join ...' command\n"
 ssh -i $ssh_private_keyfile $USER@$worker_public_ip_address 2>/dev/null -- sudo \
     kubeadm join $cp_private_ip_address:6443 \
         --token $token \
-		    --discovery-token-unsafe-skip-ca-verification
+		    --discovery-token-ca-cert-hash $hash
 
 # display the kubeconfig
 printf "creating the kubeconfig file '%s'" $kubeconfig
-ssh -i $ssh_private_keyfile $USER@$cp_public_ip_address >$kubeconfig 2>/dev/null -- \
-    sudo cat /etc/kubernetes/admin.conf 
-
+(ssh -i $ssh_private_keyfile $USER@$cp_public_ip_address >$kubeconfig 2>/dev/null -- \
+    sudo cat /etc/kubernetes/admin.conf) > $kubeconfig

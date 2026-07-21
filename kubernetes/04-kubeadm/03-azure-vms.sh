@@ -9,14 +9,13 @@ while [[ $i -le $nr ]]; do
   az vm create --name ${radical}-${nr} --resource-group hexagone-kubernetes \
      --tags stage=kubeadm vm=${radical}-${i} \
      --accept-term \
-     --image "Ubuntu2204" \
-     --size "Standard_B2s" \
+     --image "Ubuntu2404" \
+     --size "Standard_B2as_v2" \
      --authentication-type "ssh" \
      --admin-username "$USER" \
      --ssh-key-name kubeadm-ssh-key \
      --public-ip-address "${radical}-${i}-pip" \
-     --public-ip-address-allocation "dynamic" \
-     --public-ip-sku "Basic" \
+     --public-ip-sku "Standard" \
      --vnet-name "kubeadm-vnet" \
      --subnet "control-plane" \
      --nsg "" \
@@ -36,14 +35,13 @@ while [[ $i -le $nr ]]; do
   az vm create --name ${radical}-${i} --resource-group hexagone-kubernetes \
      --tags stage=kubeadm vm=${radical}-${i} \
      --accept-term \
-     --image "Ubuntu2204" \
-     --size "Standard_B2s" \
+     --image "Ubuntu2404" \
+     --size "Standard_B2as_v2" \
      --authentication-type "ssh" \
      --admin-username "$USER" \
      --ssh-key-name kubeadm-ssh-key \
      --public-ip-address "${radical}-${i}-pip" \
-     --public-ip-address-allocation "dynamic" \
-     --public-ip-sku "Basic" \
+     --public-ip-sku "Standard" \
      --vnet-name "kubeadm-vnet" \
      --subnet "workers" \
      --nsg "" \
