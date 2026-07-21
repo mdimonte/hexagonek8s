@@ -14,7 +14,8 @@ metadata:
 spec:
   ingressClassName: webapprouting.kubernetes.azure.com
   rules:
-  - http:
+  - host: "my-app.mickael.calpeabyla.com"
+    http:
       paths:
       - backend:
           service:
