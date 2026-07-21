@@ -27,7 +27,7 @@ az network nsg rule create --name allow-inbound-ssh --nsg-name kubeadm-nsg --res
    --access "Allow" \
    --direction "Inbound" \
    --protocol "Tcp" \
-   --source-address-prefixes "Internet" \
+   --source-address-prefixes "$(curl http://ifconfig.me -4)" \
    --destination-address-prefixes "*" \
    --destination-port-ranges "22"
 
