@@ -23,20 +23,7 @@ Now that the application is deployed and is accessible from outside the cluster,
 For that, make a `PodDisruptionBudget` manifest to target the deployment you have just created.  
 This `PDB` must set with the attribute `minAvailable` set to `1` and with the `selector.matchLabels` matching the labels set on the pods created by the `Deployment`.  
 
-Here is an example of a `PodDisruptionBudget`:
-
-```yaml
----
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: my-pdb
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: zookeeper
-```
+Next create a YAML manifest describing a `PodDisruptionBudget`.
 
 After you have deployed the `PDB`, simulate a maintenance operation ... this can be done by using the command `kubectl drain <node_name>`.  
 
