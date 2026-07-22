@@ -10,21 +10,12 @@ Deploy the same application as the one used in [step5](../step-5/README.md) whic
 
 ## Generate a self-signed certificate
 
-> use this option if it takes too long (for this exercise) to get your 'real' certificate
+> for the sake of simplicity, we will use a self-signed certificate here
 > Please, note that this is only for testing purpose and using such certificates is not a viable option neither in production nor in any other real environment (indus, QA, dev ...)
 
+Using the command `openssl` generate a self-signed certificate:
 ```bash
-openssl req -x509 -nodes -days 3560 -newkey rsa:4096 -sha256 \
--keyout step8.<your_name>.calpeabyla.com.key \
--out step8.<your_name>.calpeabyla.com.crt \
--subj "/CN=step8.<your_name>.calpeabyla.com/O=step8.<your_name>.calpeabyla.com" \
--extensions san \
--config <( \
- echo "[req]"; \
- echo "distinguished_name=req"; \
- echo "[san]"; \
- echo "subjectAltName=DNS:step8.<your_name>.calpeabyla.com" \
- )
+openssl req -x509 -nodes ...
 ```
 
 ## Push the certificate to the Kubernetes cluster
