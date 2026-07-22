@@ -19,7 +19,7 @@ az aks create -g hexagone-kubernetes -n aks-devtest \
    --max-pods 110 \
    --network-plugin kubenet \
    --network-policy calico \
-   --node-vm-size Standard_D4ps_v6 \
+   --node-vm-size Standard_D4as_v5 \
    --os-sku Ubuntu2404 \
    --pod-cidr 192.168.0.0/16 \
    --service-cidr 172.16.0.0/16 \
