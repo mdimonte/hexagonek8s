@@ -13,7 +13,7 @@ In order to optimize the demonstration, we are going to use a real application m
 
 ### Deploying the database `mysql`
 
-#### Create a `secret` documenting with these keys:
+#### Create a `secret` documenting these keys
 
 - `MYSQL_ROOT_PASSWORD` is the password of the `mysql` root user
 - `MYSQL_USER` is the name of an additional user to create when `mysql` starts
