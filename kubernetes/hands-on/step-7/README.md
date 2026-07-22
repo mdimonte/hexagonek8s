@@ -11,7 +11,7 @@ Let's download and install the tool that we will use in this exercise: [`kustomi
 
 ```bash
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" > /tmp/install_kustomize.sh
-sudo bash /tmp/install_kustomize.sh 4.5.7 /usr/local/bin
+sudo bash /tmp/install_kustomize.sh 5.8.1 /usr/local/bin
 ```
 
 ## Take a look at the `kustomize` documentation
@@ -72,8 +72,19 @@ Create the directories `deploy/environments`, `deploy/environments/dev` and `dep
 For now let's focus on `dev`, the overlays are made of 1 file called `kustomization.yaml` and one or more patch files.  
 In the `kustomization.yaml` file, there are these fields:
 
-- `resources`: a list that documents where the manifests are, in this case this is the base layer
-- `patches`: a list of patch files to apply
+```
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# references location where 'base' manifests are
+resources:
+- ...
+
+# list of patches to apply
+patches:
+- path: ...
+...
+```
 
 Let's create the patches.  
 Create two files called `deployment-patch.yaml` and `ingress-patch.yaml`. The content of a patch file is a Kubernetes manifest "stub", where 2 kinds of information is found:
