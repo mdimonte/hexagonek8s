@@ -4,27 +4,13 @@
 
 Complete the application deployed in step 6 with Kubernetes probes (liveness, readiness and startup)
 
-## Directory organization
-
-### work-directory
-
-The directory where the files you are working one are. You can do anything you want in there.
-
-### initial-files
-
-You will find here the base files. If you want to do this step again, copy these files to your `work-directory`.
-
-### intermediate-solution-files
-
-In here you will find the files related to different steps of this hands on. If you are stuck on a step you can check here to see a solution.
-
-## steps to run
-
 ## Get the base files
 
 This hands on aims to extend and improve the application deployed in the [hands on n°6](../step-6/README.md), so you can copy the manifest files or refer to the instruction to write them.
 
-## Add the frontend liveness probe
+## Frontend
+
+### Add liveness probe for the frontend
 
 Kubernetes probes are the core of the high availability feature on the cluster. The first and most important probe is the `liveness probe`. It checks if a pod can continue to run and if the result is negative, then the containers are killed and restarted.
 
@@ -34,11 +20,11 @@ A liveness probe should only relate to the pod itself and not depend on external
 
 Having a good liveness probe is mandatory, so for this hand-on we will do a simple check on the frontend by making a `httpGet probe` that targets `localhost:8080`
 
-## Add the readiness probe for the frontend
+### Add the readiness probe for the frontend
 
 As you saw before, the frontend cannot serve requests correctly without the backend, so we should use a `readinessProbe`. This probe purpose is exactly this, and it allows pods to not be given requests while the result is negative (in fact they are removed from the service load balancing pool). All the probes share the same syntax, so you can add the `readinessProbe` that checks if the backend is available.
 
-## Deploy the frontend
+### Deploy the frontend
 
 Now deploy the frontend manifest with the probes, the pods should not be restarting constantly while still being marked as not ready.
 
@@ -48,7 +34,9 @@ Then deploy the service and the ingress, if you try to access the frontend with 
 
 To check if our frontend probes are correctly working, let's deploy the backend app without modification. The frontend pods should become ready as soon as the backend starts.
 
-### Add a Liveness Probe on the backend
+## Backend
+
+### Add a Liveness Probe for the backend
 
 The backend also needs a liveness probe to be restarted automatically when needed. Thanks to the Spring boot framework, we have access to some useful predefined health endpoints. For this hands-on let's use them as is, but it is always better if you take time to determine which checks to use and/or to have your own health checks tailored for your needs.
 
@@ -56,13 +44,13 @@ So similarly to what we did before, let's add a liveness probe in the backend de
 
 To do this we can use the option `initialDelaySeconds`, and set it to `40`. the Spring Boot health endpoints are situated on the path `/actuator/health/liveness` and `/actuator/health/readiness`.
 
-## Add a Readiness Probe on the backend
+### Add a Readiness Probe for the backend
 
 You may have noticed that if you try to access the backend before it has finished to start, you get a 502 error. This is not something we want especially when we have multiple replicas with some starting up and others already running. So we want to have a readiness probe to not show the starting backend to a client.
 
 Let's add a `readinessProbe` that targets the Spring Boot `readiness` health endpoint. Adding a delay is not required here, and is **not recommended**, as the pod will not be killed because of a probe negative result.
 
-## Update the backend
+### Update the backend
 
 Now deploy the backend with the probes. It should be running after a minute.
 
