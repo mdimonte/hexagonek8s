@@ -1,5 +1,8 @@
 #!/bin/bash
 
-az aks delete -g hexagone-kubernetes -n aks-devtest --yes
+export RESOURCE_GROUP=hexagone-exam
+export CLUSTER_NAME=aks-exam
 
-az group delete -n hexagone-kubernetes --yes
+az aks delete -g $RESOURCE_GROUP -n $CLUSTER_NAME --yes
+
+az group delete -n $RESOURCE_GROUP --yes

@@ -1,8 +1,11 @@
 #!/bin/bash
 
-az aks get-credentials --name aks-devtest \
-   --resource-group hexagone-kubernetes \
-   --file $HOME/.kube/aks-devtest.config \
+export RESOURCE_GROUP=hexagone-exam
+export CLUSTER_NAME=aks-exam
+
+az aks get-credentials --name $CLUSTER_NAME \
+   --resource-group $RESOURCE_GROUP \
+   --file $HOME/.kube/$CLUSTER_NAME.config \
    --overwrite-existing \
    --admin
 
