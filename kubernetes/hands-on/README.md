@@ -16,3 +16,5 @@ Some step-by-step exercices to start getting your hands on Kubernetes
 - [[step-12]](step-12/): securing the internal network traffic with `NetworkPolicies`
 - [[step-13]](step-13/): running workload with persistent storage
 - [[step-14]](step-14/): deploy prometheus using Helm and observe the app (optional, optional, optional ;) )
+- [[step-15]](step-15/): discover `helm` and manage packaged apps
+- [[step-16]](step-16/): discover `argocd` and deploy app in a gitops approach
